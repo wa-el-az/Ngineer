@@ -1,0 +1,678 @@
+/* ==========================================================================
+   CSS Variables & Theming
+   ========================================================================== */
+
+/* Blue Mode (Default) */
+:root, [data-theme="blue"] {
+    --bg-base: #0f172a;
+    --bg-gradient: radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.12) 0px, transparent 50%),
+                   radial-gradient(at 100% 0%, rgba(129, 140, 248, 0.12) 0px, transparent 50%);
+    --bg-size: auto;
+    
+    /* Glassmorphism */
+    --glass-bg: rgba(30, 41, 59, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    
+    /* Text Colors */
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-accent: #38bdf8;
+    
+    /* Inputs */
+    --input-bg: rgba(15, 23, 42, 0.6);
+    --input-border: rgba(255, 255, 255, 0.1);
+    --input-focus: #38bdf8;
+    
+    /* Code Block */
+    --code-bg: #020617;
+    --code-text: #e2e8f0;
+    
+    /* Transitions */
+    --transition: all 0.3s ease;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+    --bg-base: #050505;
+    --bg-gradient: radial-gradient(circle at 50% 50%, rgba(14, 38, 74, 0.6) 0%, transparent 60%);
+    --bg-size: 200% 200%;
+    
+    --glass-bg: rgba(20, 20, 20, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.05);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+    
+    --text-primary: #ededed;
+    --text-secondary: #a1a1aa;
+    --text-accent: #60a5fa;
+    
+    --input-bg: rgba(0, 0, 0, 0.5);
+    --input-border: rgba(255, 255, 255, 0.08);
+    --input-focus: #60a5fa;
+    
+    --code-bg: #000000;
+    --code-text: #d4d4d8;
+}
+
+/* Light Mode */
+[data-theme="light"] {
+    --bg-base: #f8fafc;
+    --bg-gradient: radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.1) 0px, transparent 50%),
+                   radial-gradient(at 100% 0%, rgba(129, 140, 248, 0.1) 0px, transparent 50%);
+    --bg-size: auto;
+    
+    --glass-bg: rgba(226, 232, 240, 0.7);
+    --glass-border: rgba(0, 0, 0, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
+    
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --text-accent: #0284c7;
+    
+    --input-bg: rgba(255, 255, 255, 0.8);
+    --input-border: rgba(0, 0, 0, 0.15);
+    --input-focus: #0284c7;
+    
+    --code-bg: #f1f5f9;
+    --code-text: #1e293b;
+}
+
+/* Wael Mode */
+[data-theme="wael"] {
+    --bg-base: #0b0b0b;
+    --bg-gradient: none; /* Handled by fixed elements */
+    --bg-size: auto;
+    
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --glass-shadow: 0 25px 70px rgba(0,0,0,0.35);
+    
+    --text-primary: #f5f7fa;
+    --text-secondary: rgba(255, 255, 255, 0.78);
+    --text-accent: #4ade80; /* Wael terminal green */
+    
+    --input-bg: rgba(0, 0, 0, 0.18);
+    --input-border: rgba(255, 255, 255, 0.15);
+    --input-focus: #4ade80;
+    
+    --code-bg: rgba(0, 0, 0, 0.4);
+    --code-text: #f5f7fa;
+}
+
+/* Wael Mode Backgrounds */
+.wael-bg {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+[data-theme="wael"] .wael-bg {
+    display: block;
+}
+
+.wael-bg-left {
+    left: 0;
+    width: 58%;
+    z-index: -2;
+    background: linear-gradient(135deg, #052e21 0%, #063826 60%, #052b1f 100%);
+    background-size: 200% 200%;
+    animation: moveGradient 15s ease infinite alternate;
+}
+
+.wael-bg-right {
+    right: 0;
+    width: 52%;
+    z-index: -1;
+    background: linear-gradient(135deg, #4a0707 0%, #5b0b0b 60%, #360606 100%);
+    background-size: 200% 200%;
+    animation: moveGradient 15s ease infinite alternate reverse;
+}
+
+.wael-bg-right::before {
+    content: "";
+    position: absolute;
+    left: -140px;
+    top: -10%;
+    width: 280px;
+    height: 120%;
+    background: inherit;
+    transform: skewX(-14deg);
+    box-shadow: -20px 0 50px rgba(0,0,0,.35);
+}
+
+@media (max-width: 860px) {
+    .wael-bg-right::before { display: none; }
+    .wael-bg-left, .wael-bg-right { height: 50vh; width: 100%; }
+    .wael-bg-left { top: 0; left: 0; }
+    .wael-bg-right { bottom: 0; top: auto; right: 0; }
+}
+
+/* Wael Mode Specific Overrides */
+[data-theme="wael"] body {
+    font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.015em;
+    background-color: transparent;
+}
+
+[data-theme="wael"] .header-content h1 {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.02em;
+    background: none;
+    color: #fff;
+    -webkit-text-fill-color: initial;
+}
+
+[data-theme="wael"] .card {
+    border-radius: 28px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+}
+
+[data-theme="wael"] .card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 40px 90px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="wael"] .glass-btn {
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+[data-theme="wael"] .glass-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+[data-theme="wael"] input[type="text"],
+[data-theme="wael"] input[type="number"] {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+[data-theme="wael"] input[type="text"]:focus,
+[data-theme="wael"] input[type="number"]:focus {
+    outline: 2px solid rgba(74, 222, 128, 0.3);
+    outline-offset: 0px;
+    box-shadow: inset 0 0 10px rgba(74, 222, 128, 0.1);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="wael"] .slider:before {
+    background-color: #fff;
+}
+
+[data-theme="wael"] input:checked + .slider {
+    background-color: rgba(74, 222, 128, 0.2);
+}
+
+[data-theme="wael"] input:checked + .slider:before {
+    box-shadow: 0 0 10px rgba(74, 222, 128, 0.4);
+}
+
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+[v-cloak] {
+    display: none !important;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: transparent;
+    color: var(--text-primary);
+    line-height: 1.5;
+    min-height: 100vh;
+    position: relative;
+    transition: opacity 0.4s ease-out;
+}
+
+body.page-exit {
+    opacity: 0 !important;
+}
+
+/* Animated moving background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-base);
+    background-image: var(--bg-gradient);
+    background-size: var(--bg-size);
+    background-attachment: fixed;
+    z-index: -5;
+    pointer-events: none;
+    transition: background-color 0.5s, background-image 0.5s;
+}
+
+[data-theme="dark"] body::before {
+    animation: moveGradient 15s ease infinite alternate;
+}
+
+@keyframes moveGradient {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 100%; }
+}
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+/* Page Entrance Animations */
+@keyframes pageEnter {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+/* Critical fix: prevents the <pre> blocks from stretching the grid */
+.controls, .output {
+    min-width: 0; 
+}
+
+.controls {
+    opacity: 0;
+    animation: pageEnter 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) 0.1s forwards;
+}
+
+.output {
+    opacity: 0;
+    animation: pageEnter 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) 0.2s forwards;
+}
+
+.header {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    margin: 0 auto 1rem auto;
+    max-width: 800px;
+    background: transparent !important; 
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    position: relative;
+    opacity: 0;
+    animation: pageEnter 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+.header-content h1 {
+    font-weight: 700;
+    font-size: 3rem;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, var(--text-accent), #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.header-content p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+/* Theme Switcher */
+.theme-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    padding: 0.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
+    box-shadow: var(--glass-shadow);
+}
+
+.theme-switcher button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.theme-switcher button:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="light"] .theme-switcher button:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.theme-switcher button.active {
+    background: var(--text-accent);
+    color: #fff;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+}
+
+.theme-switcher button svg {
+    width: 18px;
+    height: 18px;
+}
+
+.sticky-wrapper {
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+    .sticky-wrapper {
+        position: relative;
+        top: 0;
+    }
+}
+
+/* ==========================================================================
+   Glassmorphism Utilities
+   ========================================================================== */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    box-shadow: var(--glass-shadow);
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.card {
+    padding: 1.75rem;
+}
+
+.module {
+    margin-bottom: 1.5rem;
+}
+
+.module h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   Form Controls
+   ========================================================================== */
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-group.toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.form-group.toggle label {
+    margin-bottom: 0;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 0.65rem 0.85rem;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    outline: none;
+}
+
+input[type="text"]::placeholder,
+input[type="number"]::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="light"] input[type="text"]::placeholder,
+[data-theme="light"] input[type="number"]::placeholder {
+    color: rgba(0, 0, 0, 0.3);
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border-color: var(--input-focus);
+    box-shadow: 0 0 0 1px var(--input-focus);
+}
+
+/* Custom Switch Toggle */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--input-bg);
+    transition: var(--transition);
+    border-radius: 24px;
+    border: 1px solid var(--input-border);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--text-secondary);
+    transition: var(--transition);
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: rgba(56, 189, 248, 0.2);
+    border-color: var(--text-accent);
+}
+
+[data-theme="light"] input:checked + .slider {
+    background-color: rgba(2, 132, 199, 0.2);
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+    background-color: var(--text-accent);
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+}
+
+/* ==========================================================================
+   Output & Code Blocks
+   ========================================================================== */
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+}
+
+.code-header h3,
+.command-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.command-card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+}
+
+.code-container {
+    background: var(--code-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+pre {
+    margin: 0;
+    padding: 1.25rem;
+    overflow-x: auto;
+}
+
+code {
+    font-family: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.85rem;
+    color: var(--code-text);
+    white-space: pre;
+    tab-size: 4;
+}
+
+/* Custom Scrollbar for Code Blocks */
+pre::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+
+pre::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+pre::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
+
+[data-theme="light"] pre::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* Buttons */
+.glass-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+[data-theme="light"] .glass-btn {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.glass-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] .glass-btn:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.glass-btn.copied {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: rgba(16, 185, 129, 0.5);
+    color: #34d399;
+}
+
+[data-theme="light"] .glass-btn.copied {
+    color: #059669;
+}
+
+/* Vue Transitions */
+.transition-content {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.transition-content:last-child {
+    margin-bottom: 0;
+}
+
+/* The actual transition animations */
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-origin: top;
+    max-height: 500px; /* Arbitrary max-height for sliding */
+}
+
+.fade-slide-enter-from,
+.fade-slide-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+    max-height: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+}

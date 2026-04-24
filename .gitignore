@@ -1,0 +1,10 @@
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Project Docs (Design Specs)
+docs/superpowers/
+
+# Local Dev
+.vscode/
+.idea/

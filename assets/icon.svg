@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+    <defs>
+        <!-- Deep dark background matching the app theme -->
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#0f172a" />
+            <stop offset="100%" stop-color="#020617" />
+        </linearGradient>
+        
+        <!-- Wael / Ngineer Green-Blue Gradient -->
+        <linearGradient id="waelGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#4ade80" />
+            <stop offset="100%" stop-color="#0284c7" />
+        </linearGradient>
+        
+        <!-- Intense Neon Glow Filter -->
+        <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="15" result="blur1" />
+            <feGaussianBlur stdDeviation="30" result="blur2" />
+            <feMerge>
+                <feMergeNode in="blur2" />
+                <feMergeNode in="blur1" />
+                <feMergeNode in="SourceGraphic" />
+            </feMerge>
+        </filter>
+        
+        <!-- Glassmorphism Specular Highlight Border -->
+        <linearGradient id="glassBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="rgba(255,255,255,0.4)" />
+            <stop offset="100%" stop-color="rgba(255,255,255,0.02)" />
+        </linearGradient>
+    </defs>
+
+    <!-- App Icon Base -->
+    <rect width="512" height="512" rx="112" fill="url(#bgGradient)" />
+    
+    <!-- Glass Border -->
+    <rect x="4" y="4" width="504" height="504" rx="108" fill="none" stroke="url(#glassBorder)" stroke-width="8" />
+
+    <!-- Abstract Server Rack Lines Background -->
+    <g stroke="rgba(255,255,255,0.05)" stroke-width="6" stroke-linecap="round">
+        <line x1="96" y1="120" x2="416" y2="120" />
+        <line x1="96" y1="180" x2="416" y2="180" />
+        <line x1="96" y1="332" x2="416" y2="332" />
+        <line x1="96" y1="392" x2="416" y2="392" />
+    </g>
+
+    <!-- Stylized Glowing N (Ngineer) -->
+    <g transform="translate(136, 126)" filter="url(#neonGlow)">
+        <!-- Left Pillar -->
+        <line x1="25" y1="25" x2="25" y2="235" stroke="#f8fafc" stroke-width="50" stroke-linecap="round" />
+        <!-- Right Pillar -->
+        <line x1="215" y1="25" x2="215" y2="235" stroke="#f8fafc" stroke-width="50" stroke-linecap="round" />
+        <!-- Diagonal Slash -->
+        <line x1="25" y1="25" x2="215" y2="235" stroke="url(#waelGradient)" stroke-width="50" stroke-linecap="round" />
+    </g>
+    
+    <!-- Server Status Indicator Dots -->
+    <circle cx="216" cy="440" r="12" fill="#4ade80" filter="url(#neonGlow)" />
+    <circle cx="256" cy="440" r="12" fill="#4ade80" />
+    <circle cx="296" cy="440" r="12" fill="rgba(255,255,255,0.2)" />
+</svg>
