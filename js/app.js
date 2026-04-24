@@ -205,6 +205,16 @@ createApp({
     methods: {
         setTheme(themeName) {
             this.theme = themeName;
+            try {
+                localStorage.setItem('ngineer_theme', themeName);
+                
+                // Update URL without reloading
+                const url = new URL(window.location);
+                url.searchParams.set('mode', themeName);
+                window.history.replaceState({}, '', url);
+            } catch (e) {
+                console.warn('Could not save theme', e);
+            }
         },
         async copyConfig() {
             try {
